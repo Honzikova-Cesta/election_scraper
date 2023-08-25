@@ -1,21 +1,46 @@
+"""
+election_scraper.py: třetí projekt do Engeto Online Python Akademie
+author: Jan Procházka
+email: jan.prochazka92@gmail.coms
+discord: .honzikovacesta
+"""
+
 import argparse
 import requests
 from bs4 import BeautifulSoup
 import csv
+import sys
 
+def get_nazev_okresu(url):
+    #ziskani obsahu webove stranky
+    response = requests.get(url)
 
-def scrape_election_urls(link, output_csv):
-    #získání obsahu webové stránky
-    response = requests.get(link)
     if response.status_code != 200:
-        print("Nepodařilo se načíst stránku kraje.")
+        print('nepodařilo se načíst stránku kraje')
+        return
+    
+    soup_kraj = BeautifulSoup(response.text, 'html.parser')
+
+    jmeno_okresu = soup_kraj.find_all('h3')
+    nazev_okresu = str(jmeno_okresu[1]).strip('</h3>').replace('\n', '').replace(':', '').strip('Okres: ')
+
+    return nazev_okresu
+
+
+def scrape_election_results(url, vychozi_soubor):
+
+    #ziskani obsahu webove stranky
+    response = requests.get(url)
+ 
+    if response.status_code != 200:
+        print('nepodařilo se načíst stránku kraje')
         return
 
     #soup objekt
-    soup_kraj = BeautifulSoup(response.text, "html.parser")
+    soup_kraj = BeautifulSoup(response.text, 'html.parser')
 
     #web scraping
-    html = soup_kraj.find_all('td', {'class': 'cislo'}) 
+    html = soup_kraj.find_all('td', {'class': 'cislo'})
     url_part = []
     
     for element in html:
@@ -36,27 +61,31 @@ def scrape_election_urls(link, output_csv):
     link = list_url_obce[1]
     response = requests.get(link)
     if response.status_code != 200:
-        print("Nepodařilo se načíst stránku obce.")
+        print('nepodařilo se načíst stránku obce')
         return
-    soup_strany = BeautifulSoup(response.text, "html.parser")
+    soup_strany = BeautifulSoup(response.text, 'html.parser')
     seznam_stran = soup_strany.find_all('td', {'class': 'overflow_name'})
     for strana in seznam_stran:
         vsechny_strany.append(strana.get_text())
 
     header_csv = header_csv_data + vsechny_strany
 
-    csv_file_path = 'sample.csv'
+    csv_file_path = vychozi_soubor
     with open(csv_file_path, mode='w', newline='', encoding='utf-8') as file:
         csv_writer = csv.writer(file)
         csv_writer.writerow(header_csv)
 
+    steps_done = 1
+    total_steps = len(list_url_obce)
+
+    #ocisteni a ulozeni jednotlivych dat do tabulky
     for link_obce in list_url_obce:
         response = requests.get(link_obce)
         if response.status_code != 200:
-            print("Nepodařilo se načíst stránku obce.")
+            print('nepodařilo se načíst stránku obce')
             return
         
-        soup_obce = BeautifulSoup(response.text, "html.parser")
+        soup_obce = BeautifulSoup(response.text, 'html.parser')
         
         row_csv = []
 
@@ -116,24 +145,36 @@ def scrape_election_urls(link, output_csv):
             pocet_stran_ocisteno = ''.join(pocet_stran)
             row_csv.append(pocet_stran_ocisteno)
 
-
-        print(row_csv)
+        #zapsani radku (row_csv) do tabulky
         with open(csv_file_path, mode='a', newline='', encoding='utf-8') as file:
             csv_writer = csv.writer(file)
             csv_writer.writerow(row_csv)
 
+        sys.stdout.write('\r' + f'zpracovávám data po řádcích: {steps_done}/{total_steps}' )
+        steps_done += 1 
+
+    print('\nstahování dokončeno')
+
+    return vychozi_soubor
 
 
+if __name__ == "__main__":
 
-use_function = scrape_election_urls('https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103','kraj.csv')
-print(use_function)
+    #definice argumentu prikazove radky
+    parser = argparse.ArgumentParser(description='skript pro scraping volebních výsledků')
+    parser.add_argument('url', help='odkaz na stránku s volebními výsledky (např. "https://volby.cz/...")')
+    parser.add_argument('vystupni_soubor', help='název výstupního souboru (např. data.csv)')
 
-'''if __name__ == "__main__":
-    #definice argumentů příkazové řádky
-    parser = argparse.ArgumentParser(description="Skript pro scraping volebních výsledků.")
-    parser.add_argument("link", help="Odkaz na stránku s volebními výsledky")
-    parser.add_argument("output_file", help="Název výstupního souboru")
+    #zpracovani argumentu
+    args = parser.parse_args()
+    
+    #nazev okresu podle zadane url
+    nazev_okresu = get_nazev_okresu(args.url)
 
+    #spusteni scrapingu
+    print(f'stahuji data z: {args.url}')
+    scrape_election_results(args.url, args.vystupni_soubor)
+    print(f'volební výsledky pro {nazev_okresu} byly úspěšně uloženy do souboru: {args.vystupni_soubor}')
     #zpracování argumentů
     args = parser.parse_args()
 
