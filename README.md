@@ -17,26 +17,26 @@ Kde `URL` je odkaz na stránku s volebními výsledky a `VYSTUPNI_SOUBOR` je ná
 3. **Výsledky**: Po úspěšném provedení skriptu budou výsledky uloženy v zadaném výstupním souboru ve formátu CSV.
 
 ## Ukázka
-**Výsledky okresu Prostějov**:
-1.argument: "https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103"
-2.argument: vysledky.csv
+Výsledky hlasování okresu Prostějov:
+  1.argument: '''bash"https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103"'''
+  2.argument: '''bash vysledky.csv'''
 
-**Spuštění scriptu**:
+2. **Spuštění scriptu**:
 '''bash
 python election_scraper.py "https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103" vysledky.csv
 '''
-**Průběh stahování**:
-stahuji data z: https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103
+3. **Průběh stahování**:
+'''bash stahuji data z: https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103
 zpracovávám data po řádcích: 97/97
 stahování dokončeno
-volební výsledky pro Prostějov byly úspěšně uloženy do souboru: vysledky.csv
+volební výsledky pro Prostějov byly úspěšně uloženy do souboru: vysledky.csv '''
 
 **Částečný výstup**:
-kód obce,název obce,voliči v seznamu,vydané obálky...
+'''bash kód obce,název obce,voliči v seznamu,vydané obálky...
 506761,Alojzov,205,145...
 589268,Bedihošť,834,527...
 ...
-590240,Želeč,436,278...
+590240,Želeč,436,278...'''
 
 ## Poznámky
 - Tento skript byl vytvořen pro vzdělávací účely a pro osobní použití.
