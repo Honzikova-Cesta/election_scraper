@@ -5,9 +5,8 @@ Tento skript je určen k automatickému stahování volebních výsledků z roku
 
 ## Použití
 1. **Instalace knihoven**: Nejprve je třeba nainstalovat potřebné knihovny. Doporučuji provádět ve virtuálním prostředí. V terminálu spusťte následující příkaz:
-  >pip --version
-                    
-  >pip install -r requirements.txt
+  >pip --version<br>
+   pip install -r requirements.txt
 
 2. **Spuštění skriptu**: Skript spustíte z příkazové řádky s následujícím příkazem:
    
@@ -29,23 +28,16 @@ Kde `URL` je odkaz na stránku s volebními výsledky a `VYSTUPNI_SOUBOR` je ná
 >python election_scraper.py "https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103" vysledky.csv
 
 3. **Průběh stahování**:
->stahuji data z: https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103
-
->zpracovávám data po řádcích: 97/97
-
->stahování dokončeno
-
->volební výsledky pro Prostějov byly úspěšně uloženy do souboru: vysledky.csv
+>stahuji data z: https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103<br>
+zpracovávám data po řádcích: 97/97<br>
+stahování dokončeno<br>
+volební výsledky pro Prostějov byly úspěšně uloženy do souboru: vysledky.csv<br>
 
 4. **Částečný výstup**:
->bash kód obce,název obce,voliči v seznamu,vydané obálky...
-
-506761,Alojzov,205,145...
-
-589268,Bedihošť,834,527...
-
-...
-
+>kód obce,název obce,voliči v seznamu,vydané obálky...<br>
+506761,Alojzov,205,145...<br>
+589268,Bedihošť,834,527...<br>
+...<br>
 590240,Želeč,436,278...
 
 ## Poznámky
