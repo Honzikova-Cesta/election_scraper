@@ -43,7 +43,7 @@ volební výsledky pro Prostějov byly úspěšně uloženy do souboru: vysledky
 - Tento skript byl vytvořen pro vzdělávací účely a pro osobní použití.
 
 ## Autor
-Jan Procházka
+- Jan Procházka
 
 
 
