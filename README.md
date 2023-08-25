@@ -5,8 +5,7 @@ Tento skript je určen k automatickému stahování volebních výsledků z roku
 
 ## Použití
 1. **Instalace knihoven**: Nejprve je třeba nainstalovat potřebné knihovny. Doporučuji provádět ve virtuálním prostředí. V terminálu spusťte následující příkaz:
-  '''bash
-   pip --version                      
+  '''pip --version                      
    pip install -r requirements.txt'''
 
 2. **Spuštění skriptu**: Skript spustíte z příkazové řádky s následujícím příkazem:
