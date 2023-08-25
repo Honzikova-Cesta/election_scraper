@@ -19,8 +19,7 @@ Kde `URL` je odkaz na stránku s volebními výsledky a `VYSTUPNI_SOUBOR` je ná
 ## Ukázka
 1. **Zadání argumentů**:
    
-  >1.argument: "https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103"
-
+  >1.argument: "https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103"<br>
   2.argument: vysledky.csv
 
 2. **Spuštění scriptu**:
