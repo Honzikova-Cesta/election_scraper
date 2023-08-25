@@ -16,9 +16,9 @@ Kde `URL` je odkaz na stránku s volebními výsledky a `VYSTUPNI_SOUBOR` je ná
 3. **Výsledky**: Po úspěšném provedení skriptu budou výsledky uloženy v zadaném výstupním souboru ve formátu CSV.
 
 ## Ukázka
-Výsledky hlasování okresu Prostějov:
+1. **Zadání argumentů**:
   >1.argument: "https://volby.cz/pls/ps2017nss/ps32?xjazyk=CZ&xkraj=12&xnumnuts=7103"
-  2.argument: vysledky.csv
+  >2.argument: vysledky.csv
 
 2. **Spuštění scriptu**:
 
@@ -30,7 +30,7 @@ zpracovávám data po řádcích: 97/97
 stahování dokončeno
 volební výsledky pro Prostějov byly úspěšně uloženy do souboru: vysledky.csv
 
-**Částečný výstup**:
+4. **Částečný výstup**:
 >bash kód obce,název obce,voliči v seznamu,vydané obálky...
 506761,Alojzov,205,145...
 589268,Bedihošť,834,527...
